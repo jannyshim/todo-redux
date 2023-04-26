@@ -1,0 +1,29 @@
+{
+  "todos": [
+    {
+      "content": "리덕스 기초 배우기",
+      "isChecked": true,
+      "id": 0
+    },
+    {
+      "content": "리액트와 리덕스 사용하기",
+      "isChecked": true,
+      "id": 1
+    },
+    {
+      "content": "새로운 개념 찾기",
+      "isChecked": false,
+      "id": 2
+    },
+    {
+      "content": "진정해",
+      "isChecked": false,
+      "id": 3
+    },
+    {
+      "content": "새 글",
+      "isChecked": false,
+      "id": 4
+    }
+  ]
+}
