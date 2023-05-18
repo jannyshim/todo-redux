@@ -3,26 +3,25 @@
     {
       "content": "리덕스 기초 배우기",
       "isChecked": true,
-      "id": 0
+      "id": 0,
+      "importance": "중요도 💫"
     },
     {
-      "content": "리액트와 리덕스 사용하기",
-      "isChecked": true,
-      "id": 1
-    },
-    {
-      "content": "새로운 개념 찾기",
+      "content": "리덕스 재밌다",
       "isChecked": false,
+      "importance": "중요도 ⭐️",
       "id": 2
     },
     {
-      "content": "진정해",
-      "isChecked": false,
+      "content": "CSS는 아직 갈길이 멀다.",
+      "isChecked": true,
+      "importance": "중요도 🌟",
       "id": 3
     },
     {
-      "content": "새 글",
+      "content": "중요도 필터링 구현",
       "isChecked": false,
+      "importance": "중요도 ✨",
       "id": 4
     }
   ]

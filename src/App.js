@@ -1,12 +1,12 @@
-import Todo from "./pages/todo";
+import TodoList from "./components/TodoList";
+import GlobalStyle from "./global-styles";
 
 function App() {
   return (
     <div>
-      <h1>hello world</h1>
+      <GlobalStyle />
       <main>
-        <h2>todos</h2>
-        <Todo />
+        <TodoList />
       </main>
     </div>
   );
