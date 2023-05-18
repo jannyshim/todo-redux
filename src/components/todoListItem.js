@@ -43,18 +43,6 @@ const TodoListItemContainer = styled.div`
   .checked {
     text-decoration: line-through;
   }
-  // @media ${({ theme }) => theme.windowSize.large} {
-  //   margin-left: 10px;
-  //   font-size: ${({ theme }) => theme.fontSize.lg};
-  // }
-  // @media ${({ theme }) => theme.windowSize.base} {
-  //   margin-left: 10px;
-  //   font-size: ${({ theme }) => theme.fontSize.base};
-  // }
-  // @media ${({ theme }) => theme.small} {
-  //   font-size: ${({ theme }) => theme.fontSize.sm};
-  //   margin-left: 10px;
-  // }
 `;
 
 const ButtonContainer = styled.span`
