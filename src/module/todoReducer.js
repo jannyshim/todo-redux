@@ -1,9 +1,11 @@
 import {
   ADDTODO,
+  EDITTODO,
   TODOCHECKED,
   DELETETODO,
   FETCH_TODOS_FAILURE,
   FETCH_TODOS_SUCCESS,
+  SELECT_IMPORTANCE,
 } from "./todoAction";
 const initialState = { todos: [] };
 
@@ -14,8 +16,20 @@ export const todoReducer = (state = initialState, action) => {
         ...state,
         todos: [
           ...state.todos,
-          { id: action.id, content: action.content, isChecked: false },
+          {
+            id: action.id,
+            content: action.content,
+            isChecked: false,
+            importance: action.importance,
+          },
         ],
+      };
+    case EDITTODO:
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.id ? { ...todo, content: action.payload } : todo
+        ),
       };
     case DELETETODO:
       return {
@@ -38,6 +52,14 @@ export const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload,
+      };
+
+    case SELECT_IMPORTANCE:
+      return {
+        ...state,
+        todos: state.todos.map((todo) =>
+          todo.id === action.id ? { ...todo, importance: action.payload } : todo
+        ),
       };
     default:
       return state;
