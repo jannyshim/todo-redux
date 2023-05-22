@@ -19,10 +19,34 @@
       "id": 3
     },
     {
-      "content": "중요도 필터링 구현",
+      "content": "중요도 필터링 구현하고싶어요",
       "isChecked": false,
       "importance": "중요도 ✨",
       "id": 4
+    },
+    {
+      "content": "중요한 투두",
+      "isChecked": false,
+      "importance": "중요도 ⭐️",
+      "id": 5
+    },
+    {
+      "content": "다음으로 중요",
+      "isChecked": true,
+      "importance": "중요도 🌟",
+      "id": 6
+    },
+    {
+      "content": "새 투두 등록",
+      "isChecked": false,
+      "importance": "중요도 💫",
+      "id": 7
+    },
+    {
+      "content": "새 할일 등록합니다.",
+      "isChecked": true,
+      "importance": "중요도 ✨",
+      "id": 8
     }
   ]
 }
