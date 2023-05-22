@@ -6,7 +6,7 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   border-bottom: 1px solid grey;
-  margin-bottom: 10px;
+  margin-bottom: 2px;
   input {
     border: 1px solid black;
     border-radius: 3px;
