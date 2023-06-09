@@ -1,9 +1,21 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import { selectImportance } from "../module/todoAction";
 import { ImportanceSelect } from "./ImportanceSelect";
 import styled from "styled-components";
+
+interface TodoListItemProps {
+  todo: {
+    id: number;
+    content: string;
+    isChecked: boolean;
+    importance: string;
+  };
+  onUpdateTodo: (id: number, content: string) => void;
+  onDeleteTodo: (id: number) => void;
+  onChecked: (id: number, isChecked: boolean) => void;
+}
 
 const TodoListItemContainer = styled.div`
   display: flex;
@@ -64,14 +76,19 @@ const ButtonContainer = styled.span`
   }
 `;
 
-const TodoListItem = ({ todo, onUpdateTodo, onDeleteTodo, onChecked }) => {
+const TodoListItem: React.FC<TodoListItemProps> = ({
+  todo,
+  onUpdateTodo,
+  onDeleteTodo,
+  onChecked,
+}) => {
   const dispatch = useDispatch();
   const { id, content, isChecked, importance } = todo;
   const [editContent, setEditContent] = useState(content);
   const [isEditing, setIsEditing] = useState(false);
   const [selectedImportance, setSelectedImportance] = useState(importance);
 
-  const handleSelect = async (e) => {
+  const handleSelect = async (e: ChangeEvent<HTMLSelectElement>) => {
     setSelectedImportance(e.target.value);
     try {
       await axios.patch(`http://localhost:3001/todos/${id}`, {
@@ -102,7 +119,8 @@ const TodoListItem = ({ todo, onUpdateTodo, onDeleteTodo, onChecked }) => {
     setIsEditing(false);
   };
 
-  const handleChange = (e) => setEditContent(e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setEditContent(e.target.value);
 
   return (
     <TodoListItemContainer>

@@ -6,10 +6,26 @@ import {
   FETCH_TODOS_FAILURE,
   FETCH_TODOS_SUCCESS,
   SELECT_IMPORTANCE,
+  TodoAction,
 } from "./todoAction";
-const initialState = { todos: [] };
 
-export const todoReducer = (state = initialState, action) => {
+interface Todo {
+  id: number;
+  content: string;
+  isChecked: boolean;
+  importance: string;
+}
+
+interface State {
+  todos: Todo[];
+  error?: Error;
+}
+const initialState: State = { todos: [] };
+
+export const todoReducer = (
+  state: State = initialState,
+  action: TodoAction
+): State => {
   switch (action.type) {
     case ADDTODO:
       return {
@@ -17,10 +33,10 @@ export const todoReducer = (state = initialState, action) => {
         todos: [
           ...state.todos,
           {
-            id: action.id,
-            content: action.content,
+            id: action.payload.id,
+            content: action.payload.content,
             isChecked: false,
-            importance: action.importance,
+            importance: action.payload.importance,
           },
         ],
       };
@@ -28,19 +44,23 @@ export const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         todos: state.todos.map((todo) =>
-          todo.id === action.id ? { ...todo, content: action.payload } : todo
+          todo.id === action.payload.id
+            ? { ...todo, content: action.payload.content }
+            : todo
         ),
       };
     case DELETETODO:
       return {
         ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.id),
+        todos: state.todos.filter((todo) => todo.id !== action.payload.id),
       };
     case TODOCHECKED:
       return {
         ...state,
         todos: state.todos.map((todo) =>
-          todo.id === action.id ? { ...todo, isChecked: !todo.isChecked } : todo
+          todo.id === action.payload.id
+            ? { ...todo, isChecked: !todo.isChecked }
+            : todo
         ),
       };
     case FETCH_TODOS_SUCCESS:
@@ -58,7 +78,9 @@ export const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         todos: state.todos.map((todo) =>
-          todo.id === action.id ? { ...todo, importance: action.payload } : todo
+          todo.id === action.payload.id
+            ? { ...todo, importance: action.payload.importance }
+            : todo
         ),
       };
     default:

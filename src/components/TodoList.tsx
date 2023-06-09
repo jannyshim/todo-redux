@@ -10,8 +10,15 @@ import {
   fetchTodosSuccess,
 } from "../module/todoAction";
 import TodoListItem from "./TodoListItem";
-import Header from "../components/Header";
+import Header from "./Header";
 import styled from "styled-components";
+
+interface Todo {
+  id: number;
+  content: string;
+  isChecked: boolean;
+  importance: string;
+}
 
 const TodoContainer = styled.div`
   display: flex;
@@ -29,18 +36,18 @@ const FilterSelect = styled.select`
   height: 1.7rem;
 `;
 
-const TodoList = () => {
+const TodoList: React.FC = () => {
   const dispatch = useDispatch();
-  const allTodos = useSelector((state) => state.todos);
+  const allTodos = useSelector((state: { todos: Todo[] }) => state.todos);
   const [selectedImportance, setSelectedImportance] = useState("전체");
 
   // 투두 불러오기
   const fetchTodos = async () => {
     try {
-      const res = await axios.get("http://localhost:3001/todos");
+      const res = await axios.get<Todo[]>("http://localhost:3001/todos");
       dispatch(fetchTodosSuccess(res.data));
-    } catch (error) {
-      dispatch(fetchTodosFailure(error));
+    } catch (error: any) {
+      dispatch(fetchTodosFailure(error as Error));
     }
   };
   useEffect(() => {
@@ -48,9 +55,9 @@ const TodoList = () => {
   }, []);
 
   // 새 투두 등록하기
-  const addTodoList = async (text, select) => {
+  const addTodoList = async (text: string, select: string) => {
     try {
-      const res = await axios.post("http://localhost:3001/todos", {
+      const res = await axios.post<Todo>("http://localhost:3001/todos", {
         content: text,
         isChecked: false,
         importance: select,
@@ -63,7 +70,7 @@ const TodoList = () => {
   };
 
   // 투두 수정
-  const handleEditTodo = async (id, editContent) => {
+  const handleEditTodo = async (id: number, editContent: string) => {
     try {
       await axios.patch(`http://localhost:3001/todos/${id}`, {
         content: editContent,
@@ -75,7 +82,7 @@ const TodoList = () => {
   };
 
   // 투두 삭제
-  const handleDeleteTodo = async (id) => {
+  const handleDeleteTodo = async (id: number) => {
     try {
       await axios.delete(`http://localhost:3001/todos/${id}`);
       dispatch(deleteTodo(id));
@@ -86,7 +93,7 @@ const TodoList = () => {
   };
 
   // 투두 완료 여부 체크
-  const handleChecked = async (id, isChecked) => {
+  const handleChecked = async (id: number, isChecked: boolean) => {
     try {
       await axios.patch(`http://localhost:3001/todos/${id}`, {
         isChecked: !isChecked,
@@ -98,11 +105,11 @@ const TodoList = () => {
     }
   };
 
-  const sortByImportance = (a, b) => {
-    return b.importance - a.importance;
-  };
+  // const sortByImportance = (a, b) => {
+  //   return b.importance - a.importance;
+  // };
 
-  const filterByImportance = (todo) => {
+  const filterByImportance = (todo: Todo) => {
     if (selectedImportance === "전체") {
       return true;
     }

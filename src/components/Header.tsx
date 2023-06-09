@@ -1,6 +1,10 @@
 import { ImportanceSelect } from "./ImportanceSelect";
-import React, { useState } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
+
+interface HeaderProps {
+  onAddTodo: (text: string, select: string) => void;
+}
 
 const HeaderContainer = styled.div`
   display: flex;
@@ -35,13 +39,14 @@ const HeaderContainer = styled.div`
     border: 1px solid #003333;
   }
 `;
-
-function Header({ onAddTodo }) {
+const Header: React.FC<HeaderProps> = ({ onAddTodo }) => {
   const [text, setText] = useState("");
   const [select, setSelect] = useState("중요도 ⭐️");
 
-  const handleChange = (e) => setText(e.target.value);
-  const handleSelect = (e) => setSelect(e.target.value);
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) =>
+    setText(e.target.value);
+  const handleSelect = (e: ChangeEvent<HTMLSelectElement>) =>
+    setSelect(e.target.value);
 
   const newTodo = () => {
     if (text === "") {
@@ -52,7 +57,7 @@ function Header({ onAddTodo }) {
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
       newTodo();
@@ -72,6 +77,6 @@ function Header({ onAddTodo }) {
       <button onClick={newTodo}>등록</button>
     </HeaderContainer>
   );
-}
+};
 
 export default Header;

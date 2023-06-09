@@ -43,9 +43,9 @@
       "id": 7
     },
     {
-      "content": "새 할일 등록합니다.",
-      "isChecked": true,
-      "importance": "중요도 ✨",
+      "content": "밝은 마음가짐으로 적용해보자",
+      "isChecked": false,
+      "importance": "중요도 🌟",
       "id": 8
     }
   ]
